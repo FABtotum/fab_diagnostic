@@ -1,0 +1,20 @@
+{
+    "description": "Tools to help diagnose problems", 
+    "hooks": [], 
+    "required_bundles": [], 
+    "icon": "fa fa-heartbeat", 
+    "author_uri": "mailto:dk@fabtotum.com", 
+    "name": "Diagnostic tools", 
+    "author": "Daniel Kesler - FABteam", 
+    "menu": {
+        "/maintenance/fab_diagnostic": {
+            "url": "plugin/fab_diagnostic", 
+            "title": "Diagnostic", 
+            "icon": "fa fa-heartbeat"
+        }
+    }, 
+    "plugin_uri": "https://github.com/FABtotum/fab_diagnostic", 
+    "version": "0.10.0", 
+    "plugin_slug": "fab_diagnostic", 
+    "filetypes": []
+}
