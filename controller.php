@@ -168,8 +168,11 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 		}
 		else
 		{
-			$logfile = '/tmp/fabui/testcase/'.$subsystem .'_'.$test_case.'/testcase.log';
-			$runfile = '/tmp/fabui/testcase/'.$subsystem .'_'.$test_case.'/run_log.json';
+			$tmpdir  = '/tmp/fabui/testcase/'.$subsystem .'_'.$test_case;
+			$logfile = $tmpdir.'/testcase.log';
+			$runfile = $tmpdir.'/run_log.json';
+			
+			shell_exec('sudo mkdir -p '.$tmpdir);
 			
 			file_put_contents('/tmp/fabui/testcase.log', '== Test case script failure =='.PHP_EOL);
 			

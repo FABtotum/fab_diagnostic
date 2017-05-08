@@ -1,3 +1,9 @@
 {
-	
+	"0001_bundles_integrity": {
+		"title" : "Bundles integrity",
+		"desc" : "Check bundles checksums",
+		"test": "bundles_integrity",
+		"interactive": false,
+		"expected_result": "passed"
+	}
 }

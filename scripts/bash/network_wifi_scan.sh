@@ -28,25 +28,16 @@ TOP=$(dirname $0)
 function test_case()
 {
 	# Success
-	time wget update.fabtotum.com/testfile -O /tmp/testfile &> /tmp/output
-	#~ true
-	RETR=$?
-	if [ x"$RETR" == x"0" ]; then
-		echo "Connection to update server is available."
+	IFACE=$(ifconfig | grep "Link " | grep wlan0 | awk '{print $1}')
+	if [ x"$IFACE" == x"wlan0" ]; then
+		echo "WiFi interface wlan0 is up."
 	else
-		echo "No connection to update server."
-		rm -f /tmp/testfile
-		rm -f /tmp/output
+		echo "WiFi interface wlan0 is down."
 		return 1
 	fi
 	
-	TIME=$(cat /tmp/output | grep real)
-	SPEED=$( python ${TOP}/../py/network_speed.py "$TIME" )
-	echo "Download speed is $SPEED"
-	
-	
-	rm -f /tmp/testfile
-	rm -f /tmp/output
+	iwlist wlan0 scan | grep -E "\s?(Cell|ESSID).+"
+	RETR=$?
 	
 	# Result
 	return $RETR

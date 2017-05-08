@@ -19,7 +19,7 @@
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
 TOP=$(dirname $0)
-. ${TOP}/fabui.env
+. ${TOP}/firmware.env
 . ${TOP}/common.sh
 
 #
@@ -28,25 +28,8 @@ TOP=$(dirname $0)
 function test_case()
 {
 	# Success
-	time wget update.fabtotum.com/testfile -O /tmp/testfile &> /tmp/output
-	#~ true
+	true
 	RETR=$?
-	if [ x"$RETR" == x"0" ]; then
-		echo "Connection to update server is available."
-	else
-		echo "No connection to update server."
-		rm -f /tmp/testfile
-		rm -f /tmp/output
-		return 1
-	fi
-	
-	TIME=$(cat /tmp/output | grep real)
-	SPEED=$( python ${TOP}/../py/network_speed.py "$TIME" )
-	echo "Download speed is $SPEED"
-	
-	
-	rm -f /tmp/testfile
-	rm -f /tmp/output
 	
 	# Result
 	return $RETR

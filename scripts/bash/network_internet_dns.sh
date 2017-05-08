@@ -27,26 +27,25 @@ TOP=$(dirname $0)
 #
 function test_case()
 {
-	# Success
-	time wget update.fabtotum.com/testfile -O /tmp/testfile &> /tmp/output
-	#~ true
-	RETR=$?
-	if [ x"$RETR" == x"0" ]; then
-		echo "Connection to update server is available."
-	else
-		echo "No connection to update server."
-		rm -f /tmp/testfile
-		rm -f /tmp/output
-		return 1
-	fi
+	DNS=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
 	
-	TIME=$(cat /tmp/output | grep real)
-	SPEED=$( python ${TOP}/../py/network_speed.py "$TIME" )
-	echo "Download speed is $SPEED"
+	RETR=1
+	total=0
+	pass=0
+	for NS in $(echo $DNS); do
+		echo "=== $NS ==="
+		echo "ping $NS -c 3"
+		ping $NS -c 3
+		if [ x"$?" == x"0" ]; then
+			RETR=0
+			let "pass+=1"
+		fi
+		let "total+=1"
+	done
 	
-	
-	rm -f /tmp/testfile
-	rm -f /tmp/output
+	echo
+	echo "Summary:"
+	echo "$pass of $total nameservers are accesible."
 	
 	# Result
 	return $RETR

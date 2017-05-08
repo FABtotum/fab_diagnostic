@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env python
 # -*- coding: utf-8; -*-
 #
 # (c) 2017 FABtotum, http://www.fabtotum.com
@@ -18,40 +18,18 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
-TOP=$(dirname $0)
-. ${TOP}/fabui.env
-. ${TOP}/common.sh
-
 #
-# Template for making a test_case
+# Initialize totumduino and read firmware version
 #
-function test_case()
-{
+def test_case(args):
+	time = args[1].split()
+	minutes = float(time[1][:-1])
+	seconds = float(time[2][:-1])
+	total_time = minutes * 60.0 + seconds
+	print "{0}MBps".format( round(10.0 / total_time, 2) )
 	# Success
-	time wget update.fabtotum.com/testfile -O /tmp/testfile &> /tmp/output
-	#~ true
-	RETR=$?
-	if [ x"$RETR" == x"0" ]; then
-		echo "Connection to update server is available."
-	else
-		echo "No connection to update server."
-		rm -f /tmp/testfile
-		rm -f /tmp/output
-		return 1
-	fi
-	
-	TIME=$(cat /tmp/output | grep real)
-	SPEED=$( python ${TOP}/../py/network_speed.py "$TIME" )
-	echo "Download speed is $SPEED"
-	
-	
-	rm -f /tmp/testfile
-	rm -f /tmp/output
-	
-	# Result
-	return $RETR
-}
+	exit(0)
 
-testcase_cleanup
-test_case $@ > ${TEST_CASE_LOG} 2>&1
-testcase_evaluate_result $?
+if __name__ == "__main__":
+	import sys
+	test_case(sys.argv)
