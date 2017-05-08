@@ -33,9 +33,11 @@ def test_case(baud_rate):
 	
 	if reply != '':
 		# Success
+		print "Received reply [{0}] on port {1} @ {2} baud".format(reply, port, baud_rate)
 		exit(0)
 		
 	# Failed
+	print "No reply on port {1} @ {2} baud".format(reply, port, baud_rate)
 	exit(1)
 
 if __name__ == "__main__":

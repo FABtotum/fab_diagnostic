@@ -1,3 +1,16 @@
 {
-	
+	"0001_internet" : {
+		"title" : "Internet connection",
+		"desc" : "Check if internet connection is available",
+		"test": "internet",
+		"interactive": false,
+		"expected_result": "passed"
+	},
+	"0002_internet_speed" : {
+		"title" : "Update server",
+		"desc" : "Check connection to the update server and download speed",
+		"test": "update_speed",
+		"interactive": false,
+		"expected_result": "passed"
+	}
 }

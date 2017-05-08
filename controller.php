@@ -77,6 +77,31 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 			
 			foreach($test_cases as $tc_key => $tc_info)
 			{
+				$run_file = '/tmp/fabui/testcase/'.$key.'_'.$tc_info['test'].'/run_log.json';
+				$has_run = file_exists($run_file);
+				$run_content = '';
+				if($has_run)
+				{
+					$run_info = json_decode( file_get_contents($run_file), 1 );
+					if(file_exists($run_info['log']))
+						$run_info['log'] = file_get_contents($run_info['log']);
+					else
+						$run_info['log'] = '';
+						
+					if(file_exists($run_info['result']))
+						$data['result'] = file_get_contents($run_info['result']);
+					else
+						$data['result'] = '';
+					
+					if($run_info['test'] == 'passed')
+					{
+						$run_content ='<button class="btn btn-success test-action" data-subsystem="'.$key.'" data-test-case="'.$tc_info['test'].'" data-action="show-log"><i class="fa fa-check-circle" aria-hidden="true"></i> Passed</button>';
+					}
+					else
+					{
+						$run_content ='<button class="btn btn-danger test-action" data-subsystem="'.$key.'" data-test-case="'.$tc_info['test'].'" data-action="show-log"><i class="fa fa-times-circle" aria-hidden="true"></i> Failed</button>';
+					}
+				}
 				$tab_content .= '
 					<div class="row">
 						<div class="col col-md-6">
@@ -89,7 +114,7 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 						</div>
 						<div class="col col-md-6">
 							<button class="btn test-action" data-subsystem="'.$key.'" data-test-case="'.$tc_info['test'].'" data-action="run"><i class="fa fa-play" aria-hidden="true"></i></button>
-							<span id="'.$tc_info['test'].'-result"></span>
+							<span id="'.$key.'_'.$tc_info['test'].'-result">'.$run_content.'</span>
 						</div>
 					</div>
 					<hr class="simple">';
@@ -114,6 +139,7 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 		$widget->body   = array('content' => $this->load->view(plugin_url('main_widget'), $data, true ), 'class'=>'no-padding', 'footer'=>$widgeFooterButtons);
 
 		$this->addJsInLine($this->load->view(plugin_url('js'), $data, true));
+		$this->addJSFile( plugin_assets_url('js/ansi_up.js'));
 		$this->content = $widget->print_html(true);
 		$this->view();
 	}
@@ -140,8 +166,37 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 				$data['result'] = '';
 				
 		}
+		else
+		{
+			$logfile = '/tmp/fabui/testcase/'.$subsystem .'_'.$test_case.'/testcase.log';
+			$runfile = '/tmp/fabui/testcase/'.$subsystem .'_'.$test_case.'/run_log.json';
+			
+			file_put_contents('/tmp/fabui/testcase.log', '== Test case script failure =='.PHP_EOL);
+			
+			$data = array(
+				'log' => $logfile,
+				'test' => 'failed',
+				'result' => ''
+			);
+			
+			file_put_contents('/tmp/fabui/run_log.json', json_encode($data));
+			
+			$result = shell_exec('sudo sh '.$extPath . $subsystem . '_' . $test_case . '.sh >> /tmp/fabui/testcase.log 2>&1');
+			
+			shell_exec('sudo mv /tmp/fabui/testcase.log '.$logfile);
+			shell_exec('sudo mv /tmp/fabui/run_log.json '.$runfile);
+		}
 		
 		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+	
+	public function getTestCaseLog($subsystem, $test_case)
+	{
+		$logfile = '/tmp/fabui/testcase/'.$subsystem .'_'.$test_case.'/testcase.log';
+		if(file_exists($logfile))
+		{
+			echo file_get_contents($logfile);
+		}
 	}
 
  }

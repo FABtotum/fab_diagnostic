@@ -18,13 +18,23 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
+TOP=$(dirname $0)
+. ${TOP}/firmware.env
+. ${TOP}/common.sh
 
+#
+# Template for making a test_case
+#
 function test_case()
 {
 	# Success
-	exit 0
+	true
+	RETR=$?
 	
-	# Failure
+	# Result
+	return $RETR
 }
 
-test_case $@ 2>&1
+testcase_cleanup
+test_case $@ > ${TEST_CASE_LOG} 2>&1
+testcase_evaluate_result $?

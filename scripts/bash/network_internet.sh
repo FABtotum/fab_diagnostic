@@ -19,25 +19,24 @@
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
 TOP=$(dirname $0)
-. ${TOP}/firmware.env
+. ${TOP}/fabui.env
 . ${TOP}/common.sh
 
 #
-# Dump flash content to a file
+# Template for making a test_case
 #
 function test_case()
 {
-	# Make sure no service is using the serial port
-	stop_fabui_services
-	
-	# Check totumduino bootloader communication
-	totumduino_reset
-	sleep 2
-	python ${TOP}/../py/firmware_baud.py 250000
+	# Success
+	echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 -w 5 > /dev/null 2>&1
 	RETR=$?
 	
-	# Start FABUI services
-	start_fabui_services
+	if [ x"$RETR" == x"0" ]; then
+		echo "Internet connection is available (google.com)"
+	else
+		echo "No connection is available (google.com)"
+	fi
+	
 	
 	# Result
 	return $RETR
@@ -46,4 +45,3 @@ function test_case()
 testcase_cleanup
 test_case $@ > ${TEST_CASE_LOG} 2>&1
 testcase_evaluate_result $?
-

@@ -33,7 +33,7 @@ function test_case()
 	# Check totumduino bootloader communication
 	totumduino_reset
 	sleep 2
-	python ${TOP}/../py/firmware_version.py > /tmp/fabui/testcase.result
+	python ${TOP}/../py/firmware_version.py
 	RETR=$?
 	
 	# Start FABUI services
@@ -44,5 +44,5 @@ function test_case()
 }
 
 testcase_cleanup
-test_case $@ > /tmp/fabui/testcase.log 2>&1
-testcase_evaluate_result $? /tmp/fabui/testcase.result
+test_case $@ > ${TEST_CASE_LOG} 2>&1
+testcase_evaluate_result $?

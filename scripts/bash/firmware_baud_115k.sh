@@ -44,5 +44,5 @@ function test_case()
 }
 
 testcase_cleanup
-test_case $@ > /tmp/fabui/testcase.log 2>&1
+test_case $@ > ${TEST_CASE_LOG} 2>&1
 testcase_evaluate_result $?

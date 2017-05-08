@@ -4,41 +4,41 @@
 		"desc" : "Check bootloader communcation",
 		"test": "connection",
 		"interactive": false,
-		"expected_result": "success"
+		"expected_result": "passed"
 	},
 	"0002_baud_115k": {
 		"title" : "Baudrate (115k)",
 		"desc" : "Check if totumduino is using 115200 baudrate",
 		"test": "baud_115k",
 		"interactive": false,
-		"expected_result": "fail"
+		"expected_result": "failed"
 	},
 	"0003_baud_250k": {
 		"title" : "Baudrate (250k)",
 		"desc" : "Check if totumduino is using 250000 baudrate",
 		"test": "baud_250k",
 		"interactive": false,
-		"expected_result": "success"
+		"expected_result": "passed"
 	},
 	"0004_fw_version": {
 		"title" : "Firmware version",
 		"desc" : "Get firmware version",
 		"test": "version",
 		"interactive": false,
-		"expected_result": "success"
+		"expected_result": "passed"
 	},
 	"0005_dump_flash": {
 		"title" : "Dump flash",
 		"desc" : "Dump totumduino flash content to a file",
 		"test": "dump_flash",
 		"interactive": false,
-		"expected_result": "success"
+		"expected_result": "passed"
 	},
 	"0006_dump_flash": {
 		"title" : "Dump EEPROM",
 		"desc" : "Dump totumduino EEPROM content to a file",
 		"test": "dump_eeprom",
 		"interactive": false,
-		"expected_result": "success"
+		"expected_result": "passed"
 	}
 }

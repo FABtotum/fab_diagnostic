@@ -19,7 +19,11 @@
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
 def test_case():
+	# Success
 	exit(0)
+	
+	# Failure
+	exit(1)
 
 if __name__ == "__main__":
     test_case()

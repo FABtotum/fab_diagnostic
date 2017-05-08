@@ -31,7 +31,7 @@ function test_case()
 	stop_fabui_services
 	
 	# Check totumduino bootloader communication
-	HEXFILE="/tmp/fabui/flash.hex"
+	HEXFILE="${TEMP_PATH}/flash.hex"
 	${AVRDUDE} ${AVRDUDE_ARGS} -F -U flash:r:${HEXFILE}:i
 	RETR=$?
 	
@@ -43,5 +43,5 @@ function test_case()
 }
 
 testcase_cleanup
-test_case $@ > /tmp/fabui/testcase.log 2>&1
-testcase_evaluate_result $? - /tmp/fabui/flash.hex
+test_case $@ > ${TEST_CASE_LOG} 2>&1
+testcase_evaluate_result $? - ${TEMP_PATH}/flash.hex
