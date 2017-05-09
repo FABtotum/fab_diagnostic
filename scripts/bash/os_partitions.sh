@@ -27,23 +27,23 @@ TOP=$(dirname $0)
 #
 function test_case()
 {
-	cd /mnt/live/mnt/bundles
-	RETR=0
-	total=0
-	pass=0
+	# Log of partition table
+	fdisk -u -l /dev/mmcblk0
+	echo
 	
-	for bundle in $(ls *.cb); do
-		md5sum -c ${bundle}.md5sum
-		if [ x"$?" == x"0" ]; then
-			let "pass+=1"
-		fi
-		let "total+=1"
+	. /mnt/live/mnt/boot/earlyboot/earlyboot.conf
+	
+	TABLE=$(fdisk -ul /dev/mmcblk0 | grep "^/dev/mmcblk0" | awk '{print $1 ":" $7}')
+	PARTS=""
+	for pt_info in $(echo $PARTITIONS); do
+		NUM=$(echo $pt_info | awk -F: '{print $1}')
+		FS=$(echo $pt_info | awk -F: '{print $3}' | awk -F, '{print $1}')
+		SZ=$(echo $pt_info | awk -F: '{print $5}' | awk -F, '{print $1}')
+		PARTS="${PARTS} ${NUM}:${FS}:${SZ}"
 	done
 	
-	echo
-	echo "Summary"
-	echo "$pass of $total bundles passed the integrity check."
-	
+	python ${TOP}/../py/os_partitions.py "$TABLE" "$PARTS"
+	RETR=$?
 	# Result
 	return $RETR
 }

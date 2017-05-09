@@ -135,7 +135,7 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 
 		$widget         = $this->smart->create_widget($widgetOptions);
 		$widget->id     = 'main-widget-head-installation';
-		$widget->header = array('icon' => 'fa fa-heartbeat', "title" => "<h2>" , _("Diagnostic tools") . "</h2>", 'toolbar' => $headerToolbar);
+		$widget->header = array('icon' => 'fa fa-heartbeat', "title" => "<h2>" . _("Diagnostic tools") . "</h2>", 'toolbar' => $headerToolbar);
 		$widget->body   = array('content' => $this->load->view(plugin_url('main_widget'), $data, true ), 'class'=>'no-padding', 'footer'=>$widgeFooterButtons);
 
 		$this->addJsInLine($this->load->view(plugin_url('js'), $data, true));

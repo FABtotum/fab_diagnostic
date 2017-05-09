@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/bash
 # -*- coding: utf-8; -*-
 #
 # (c) 2017 FABtotum, http://www.fabtotum.com
@@ -18,12 +18,35 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
-def test_case():
-	# Success
-	exit(0)
-	
-	# Failure
-	exit(1)
+TOP=$(dirname $0)
+. ${TOP}/firmware.env
+. ${TOP}/common.sh
 
-if __name__ == "__main__":
-	test_case()
+#
+# Template for making a test_case
+#
+function test_case()
+{
+	RETR=0
+	df -h
+	echo
+	
+	for info in $(df -h | grep /dev/mmcblk0 | awk '{print $1 ":" $5}'); do
+		PT=$(echo $info | awk -F: '{print $1}')
+		USAGE=$(echo $info | awk -F: '{print $2}' | awk -F% '{print $1}')
+		if [ "$USAGE" -gt 90 ]; then
+			echo $PT "${USAGE}% space usage is critical!!!"
+			RETR=1
+		else
+			#echo $PT $USAGE
+			echo $PT "${USAGE}% space usage is in the safe limits"
+		fi
+	done
+	
+	# Result
+	return $RETR
+}
+
+testcase_cleanup
+test_case $@ > ${TEST_CASE_LOG} 2>&1
+testcase_evaluate_result $?

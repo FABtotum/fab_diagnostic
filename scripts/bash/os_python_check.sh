@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/bin/bash
 # -*- coding: utf-8; -*-
 #
 # (c) 2017 FABtotum, http://www.fabtotum.com
@@ -18,12 +18,22 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
-def test_case():
-	# Success
-	exit(0)
-	
-	# Failure
-	exit(1)
+TOP=$(dirname $0)
+. ${TOP}/firmware.env
+. ${TOP}/common.sh
 
-if __name__ == "__main__":
-	test_case()
+#
+# Template for making a test_case
+#
+function test_case()
+{
+	python ${TOP}/../py/os_python_check.py
+	RETR=$?
+	
+	# Result
+	return $RETR
+}
+
+testcase_cleanup
+test_case $@ > ${TEST_CASE_LOG} 2>&1
+testcase_evaluate_result $?
