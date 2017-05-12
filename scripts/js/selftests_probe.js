@@ -1,25 +1,13 @@
-selftests_milling_motor = {
+selftests_probe = {
 	
 	start: function () {
 		console.log('template: START');
-		
-		// init code
-		
-		
-		window.customNotificationsHandler = selftests_milling_motor.customNotificationsHandler;
+		window.customNotificationsHandler = selftests_probe.customNotificationsHandler;
 	},
 	
 	end: function () {
 		console.log('template: END');
-		
 		window.customNotificationsHandler = undefined;
-		
-		// cleanup code
-		
-		/*$("#testcaseModal").modal('hide');
-		$('#testcaseModal').unbind('shown.bs.modal');
-		$("#modal-graph").hide();
-		$("#modal-trace").hide();*/
 	},
 	
 	sendResponse: function (id, response)
@@ -53,17 +41,12 @@ selftests_milling_motor = {
 					var buttons = obj.data.buttons;
 					
 					$.SmartMessageBox({
-							title: "<i class='fa fa-warning'></i> " + msg,
-							content: '',
+							title: "<i class='fa fa-warning'></i> Confirm",
+							content: msg,
 							buttons: buttons
 						}, function(ButtonPressed) {
 							console.log('ButtonPressed', ButtonPressed);
-							selftests_milling_motor.sendResponse(id, ButtonPressed);
-							
-							$("#modal-trace").show();
-							$("#testcaseModal").modal({ keyboard: false, backdrop: 'static' });
-							$("#testcaseModal").modal('show');
-							
+							selftests_probe.sendResponse(id, ButtonPressed);
 						});
 					
 					} break;
@@ -72,16 +55,13 @@ selftests_milling_motor = {
 					var msg = obj.data.msg;
 					var buttons = obj.data.buttons;
 					
-					$("#testcaseModal").modal('hide');
-					$("#modal-trace").hide();
-					
 					$.SmartMessageBox({
 							title: "<i class='fa fa-question-circle'></i> " + msg,
 							content: '',
 							buttons: buttons
 						}, function(ButtonPressed) {
 							console.log('ButtonPressed', ButtonPressed);
-							selftests_milling_motor.sendResponse(id, ButtonPressed);
+							selftests_probe.sendResponse(id, ButtonPressed);
 						});
 					
 					} break;

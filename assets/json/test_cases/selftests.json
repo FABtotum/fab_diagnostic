@@ -47,5 +47,26 @@
 		"test": "endstops_movement",
 		"expected_result": "passed",
 		"output_format": "html"
+	},
+	"0008_speed": {
+		"title" : "Speed test",
+		"desc" : "Check different movement speed",
+		"test": "speed_movement",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0009_probe": {
+		"title" : "Touch probe",
+		"desc" : "Check touch probe functionality ",
+		"test": "probe",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0010_ambient_lights": {
+		"title" : "Ambient lights",
+		"desc" : "Check if the RGB ambient LEDs are working",
+		"test": "ambient_lights",
+		"expected_result": "passed",
+		"output_format": "html"
 	}
 }

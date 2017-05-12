@@ -29,6 +29,9 @@ class TestCase(GCodePusher):
 	def __init__(self):
 		super(TestCase, self).__init__()
 		
+		self.has_opened = False
+		self.has_closed = False
+		
 		# Notification service
 		self.ns = NotifyService(config=self.config)
 		
@@ -43,40 +46,29 @@ class TestCase(GCodePusher):
 		self.error_code = error_code
 		exit(self.error_code)
 	
-	def __stress_test_thread(self):
-		self.trace('=== Milling motor stress test started ===')
-		
-		self.send('M3 S6000')
-		self.trace('Waiting to start up...')
-		time.sleep(7)
-		
-		for rpm in range(7,14):
-			rpm *= 1000
-			self.send('M3 S{0}'.format(rpm) )
-			time.sleep(2)
-		
-		self.send('M5')
-		self.trace('Stopping motor')
-		time.sleep(2)
-		
-		data = {
-			'id' : 'is_working_question',
-			'type': 'question',
-			'msg': 'Did the motor start and was changing speed?',
-			'buttons' : '[Yes][No]'
-		}
-		self.ns.notify('selftest', data)
-	
 	def custom_action_callback(self, action, data):
 		if action == "custom":
-			if data[0] == 'start_motor' and data[1] == 'OK':
-				self.stress_test_thread = Thread( target=self.__stress_test_thread )
-				self.stress_test_thread.start()
-			elif data[0] == 'is_working_question':
-				self.trace('Is the motor working...{0}'.format(data[1]))
-				if data[1] == 'Yes':
+			if data[0] == 'is_probe_opened':
+				self.has_opened = ('Yes' == data[1])
+				self.trace('Is probe opened...{0}'.format(data[1]))
+				self.trace("Closing probe")
+				self.gcs.send('M402')
+				data = {
+					'id' : 'is_probe_closed',
+					'type': 'question',
+					'msg': 'Is the probe closed?',
+					'buttons' : '[Yes][No]'
+				}
+				self.ns.notify('selftest', data)
+				
+			elif data[0] == 'is_probe_closed':
+				self.has_closed = ('Yes' == data[1])
+				self.trace('Is probe closed...{0}'.format(data[1]))
+
+				if self.has_opened and self.has_closed:
 					self.exit(0)
-				self.exit(1)
+				else:
+					self.exit(1)
 			else:
 				self.exit(1)
 		else:
@@ -86,28 +78,24 @@ class TestCase(GCodePusher):
 	def run(self):
 		self.resetTrace()
 
-		self.trace('=== Preparing test ===')
+		# Preparing
+		self.send('M402')
 
-		head_info = self.config.get_current_head_info()
-		self.trace('Installed head: {0}'.format(head_info['name']))
-		
-		if "mill" not in head_info['capabilities']:
-			self.trace('Head does not support milling.')
-			self.trace('Skipping test.')
-			self.stop()
-			exit(200)
+		# Start
+		self.trace("=== Starting probe test ===")
+		self.trace("Opening probe")
+		self.send('M401')
 
 		data = {
-			'id' : 'start_motor',
-			'type': 'confirm',
-			'msg': 'When ready click OK to start the motor.',
-			'buttons' : '[OK]'
+			'id' : 'is_probe_opened',
+			'type': 'question',
+			'msg': 'Is the probe extended?',
+			'buttons' : '[Yes][No]'
 		}
-		
 		self.ns.notify('selftest', data)
 		
 		self.loop()
-		self.trace("=== Milling motor stress test finished ===")
+		self.trace("=== Probe test finished ===")
 		self.exit(self.error_code)
 		
 if __name__ == "__main__":

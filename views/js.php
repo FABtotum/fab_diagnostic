@@ -73,6 +73,8 @@
 			}
 		}
 		
+		//~ return;
+		
 		$.ajax({
 			  url: "<?php echo site_url( plugin_url("runTestCase") ) ?>/" + subsystem + "/" + test_case,
 			  dataType : 'json',
