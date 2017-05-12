@@ -1,3 +1,51 @@
 {
-	
+	"0001_services": {
+		"title" : "FABUI services",
+		"desc" : "Check if all fabui services are running",
+		"test": "services",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0002_totumduino": {
+		"title" : "Totumduino link",
+		"desc" : "Check if communication with totumduino is working",
+		"test": "totumduino_link",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0003_psu": {
+		"title" : "Power supply check",
+		"desc" : "Check power supply voltage and current",
+		"test": "psu",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0004_nozzle_heater": {
+		"title" : "Nozzle heater",
+		"desc" : "Check the nozzle heater",
+		"test": "nozzle_heater",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0005_bed_heater": {
+		"title" : "Bed heater",
+		"desc" : "Check the bed heater",
+		"test": "bed_heater",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0006_milling_motor": {
+		"title" : "Milling motor",
+		"desc" : "Check the milling motor",
+		"test": "milling_motor",
+		"expected_result": "passed",
+		"output_format": "html"
+	},
+	"0007_endstops_movement": {
+		"title" : "Endstops and movement",
+		"desc" : "Check endstops functionality and XYZ movement",
+		"test": "endstops_movement",
+		"expected_result": "passed",
+		"output_format": "html"
+	}
 }

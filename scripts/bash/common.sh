@@ -54,6 +54,8 @@ function testcase_evaluate_result()
 {
 	if [ x"$1" == x"0" ]; then
 		echo '{"test":"passed", "log":"'${TEST_CASE_LOG}'", "result":"'$2'"}' | tee ${TEMP_PATH}/run_log.json
+	elif [ x"$1" == x"200" ]; then
+		echo '{"test":"skipped", "log":"'${TEST_CASE_LOG}'", "result":""}' | tee ${TEMP_PATH}/run_log.json
 	else
 		echo '{"test":"failed", "log":"'${TEST_CASE_LOG}'", "result":""}' | tee ${TEMP_PATH}/run_log.json
 	fi

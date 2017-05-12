@@ -50,7 +50,7 @@
 					var tmp = ansi_up.ansi_to_html(value);
 					html += tmp + "<br>";
 				});
-				$(".modal-body").html( html );
+				$("#log-content").html( html );
 				$("#logsModal").modal('show');
 				
 				$(".test-action").removeClass('disabled');
@@ -60,6 +60,18 @@
 	function runTestCase(subsystem, test_case)
 	{
 		console.log("run testcase", subsystem, test_case);
+		
+		var objectString = subsystem + "_" + test_case;
+		var obj_check = eval("typeof " + objectString);
+		
+		if(obj_check == "object")
+		{
+			var fun_check = eval("typeof " + objectString + ".start");
+			if(fun_check == "function")
+			{
+				eval(objectString+".start()");
+			}
+		}
 		
 		$.ajax({
 			  url: "<?php echo site_url( plugin_url("runTestCase") ) ?>/" + subsystem + "/" + test_case,
@@ -74,12 +86,19 @@
 			{
 				
 				if(data.test == "passed")
-				{
 					html='<button class="btn btn-success test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-check-circle" aria-hidden="true"></i> Passed</button>';
-				}
+				else if(data.test == "skipped")
+					html='<button class="btn btn-warning test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Skipped</button>';
 				else
-				{
 					html='<button class="btn btn-danger test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-times-circle" aria-hidden="true"></i> Failed</button>';
+			}
+			
+			if(obj_check == "object")
+			{
+				var fun_check = eval("typeof " + objectString + ".end");
+				if(fun_check == "function")
+				{
+					eval(objectString+".end()");
 				}
 			}
 			
@@ -89,6 +108,63 @@
 			$('.test-action').on('click', doTestAction);
 			
 		});
+	}
+	
+	function getPlotTemperatures(source)
+	{
+		var seriesTemp   = [];
+		var seriesTarget = [];
+		var data            = new Array();
+		
+		if(source == undefined)
+		{
+			source = "ext";
+		}
+		
+		var temp_label = _("Nozzle temperature");
+		var target_label = _("Nozzle target");
+		
+		if(source == "ext")
+		{
+			$.each( temperaturesPlot.extruder.temp, function( key, plot ) {
+				seriesTemp.push([plot.time, plot.value]);
+			});
+			$.each( temperaturesPlot.extruder.target, function( key, plot ) {
+				seriesTarget.push([plot.time, plot.value]);
+			});
+			
+			
+		}
+		else if(source == "bed")
+		{
+			$.each( temperaturesPlot.bed.temp, function( key, plot ) {
+				seriesTemp.push([plot.time, plot.value]);
+			});
+			$.each( temperaturesPlot.bed.target, function( key, plot ) {
+				seriesTarget.push([plot.time, plot.value]);
+			});
+			
+			temp_label = _("Bed temperature");
+			target_label = _("Bed target");
+		}
+		
+		// actual line
+		data.push({
+			data: seriesTemp,
+			lines: { show: true, fill: true, lineWidth:0.5},
+			label: temp_label,
+			color: "#FF0000",
+			points: {"show" : false}
+		});
+		// target line
+		data.push({
+			data: seriesTarget,
+			lines: { show: true, fill: false, lineWidth:1 },
+			label: target_label,
+			color: "#33ccff",
+			points: {"show" : false}
+		});
+		return data;
 	}
 
 </script>

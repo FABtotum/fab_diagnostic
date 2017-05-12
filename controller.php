@@ -14,12 +14,7 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		if(!$this->input->is_cli_request()){ //avoid this form command line
-			//check if there's a running task
-			//load libraries, models, helpers
-			$this->load->model('Tasks', 'tasks');
-			$this->runningTask = $this->tasks->getRunning();
-		}
+		session_write_close(); //avoid freezing page
 	}
 
 	private function getTestCases($test)
@@ -67,6 +62,8 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 		if($tab == '')
 			$tab = 'selftests';
 		
+		$test_case_js = '';
+		
 		foreach($tabs as $key => $title)
 		{
 			$is_active = ($tab == $key);
@@ -77,6 +74,12 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 			
 			foreach($test_cases as $tc_key => $tc_info)
 			{
+				$test_case_js_file = plugin_path() . '/scripts/js/'.$key.'_'.$tc_info['test'].'.js';
+				if( file_exists($test_case_js_file) )
+				{
+					$test_case_js .= file_get_contents($test_case_js_file);
+				}
+				
 				$run_file = '/tmp/fabui/testcase/'.$key.'_'.$tc_info['test'].'/run_log.json';
 				$has_run = file_exists($run_file);
 				$run_content = '';
@@ -94,13 +97,11 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 						$data['result'] = '';
 					
 					if($run_info['test'] == 'passed')
-					{
 						$run_content ='<button class="btn btn-success test-action" data-subsystem="'.$key.'" data-test-case="'.$tc_info['test'].'" data-action="show-log"><i class="fa fa-check-circle" aria-hidden="true"></i> Passed</button>';
-					}
+					else if ($run_info['test'] == 'skipped')
+						$run_content ='<button class="btn btn-warning test-action" data-subsystem="'.$key.'" data-test-case="'.$tc_info['test'].'" data-action="show-log"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Skipped</button>';
 					else
-					{
 						$run_content ='<button class="btn btn-danger test-action" data-subsystem="'.$key.'" data-test-case="'.$tc_info['test'].'" data-action="show-log"><i class="fa fa-times-circle" aria-hidden="true"></i> Failed</button>';
-					}
 				}
 				$tab_content .= '
 					<div class="row">
@@ -139,7 +140,16 @@ class Plugin_fab_diagnostic extends FAB_Controller {
 		$widget->body   = array('content' => $this->load->view(plugin_url('main_widget'), $data, true ), 'class'=>'no-padding', 'footer'=>$widgeFooterButtons);
 
 		$this->addJsInLine($this->load->view(plugin_url('js'), $data, true));
+		$this->addJsInLine($test_case_js);
+		
 		$this->addJSFile( plugin_assets_url('js/ansi_up.js'));
+		
+		$this->addJSFile('/assets/js/plugin/flot/jquery.flot.cust.min.js'); //chart
+		$this->addJSFile('/assets/js/plugin/flot/jquery.flot.resize.min.js'); //chart
+		$this->addJSFile('/assets/js/plugin/flot/jquery.flot.fillbetween.min.js'); //chart
+		$this->addJSFile('/assets/js/plugin/flot/jquery.flot.time.min.js'); //chart
+		$this->addJSFile('/assets/js/plugin/flot/jquery.flot.tooltip.min.js'); //chart
+		
 		$this->content = $widget->print_html(true);
 		$this->view();
 	}

@@ -4,41 +4,47 @@
 		"desc" : "Check if ethernet gateway is configured and accessible",
 		"test": "ethernet_gw",
 		"interactive": false,
-		"expected_result": "passed"
+		"expected_result": "passed",
+		"output_format": "terminal"
 	},
 	"0003_wifi_gw": {
 		"title": "WiFi gateway",
 		"desc" : "Check if WiFi gateway is configured and accessible",
 		"test": "wifi_gw",
 		"interactive": false,
-		"expected_result": "passed"
+		"expected_result": "passed",
+		"output_format": "terminal"
 	},
 	"0003_wifi_scan": {
 		"title": "WiFi scan",
 		"desc" : "Check if WiFi scan feature is working",
 		"test": "wifi_scan",
 		"interactive": false,
-		"expected_result": "passed"
+		"expected_result": "passed",
+		"output_format": "terminal"
 	},
 	"0002_internet_dns": {
 		"title" : "Internet DNS",
 		"desc" : "Check if DNS server is configured and accessible",
 		"test": "internet_dns",
 		"interactive": false,
-		"expected_result": "passed"
+		"expected_result": "passed",
+		"output_format": "terminal"
 	},
 	"0001_internet" : {
 		"title" : "Internet connection",
 		"desc" : "Check if internet connection is available",
 		"test": "internet",
 		"interactive": false,
-		"expected_result": "passed"
+		"expected_result": "passed",
+		"output_format": "terminal"
 	},
 	"0002_internet_speed" : {
 		"title" : "Update server",
 		"desc" : "Check connection to the update server and download speed",
 		"test": "update_speed",
 		"interactive": false,
-		"expected_result": "passed"
+		"expected_result": "passed",
+		"output_format": "terminal"
 	}
 }
