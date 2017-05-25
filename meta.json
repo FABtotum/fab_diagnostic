@@ -5,7 +5,7 @@
     "icon": "fa fa-heartbeat", 
     "author_uri": "mailto:dk@fabtotum.com", 
     "name": "Diagnostic tools", 
-    "author": "Daniel Kesler - FABteam", 
+    "author": "FABteam", 
     "menu": {
         "/maintenance/fab_diagnostic": {
             "url": "plugin/fab_diagnostic", 
