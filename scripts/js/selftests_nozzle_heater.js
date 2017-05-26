@@ -50,8 +50,7 @@ selftests_nozzle_heater = {
 					var d = new Date(val);
 					return d.getHours() + ":" + d.getMinutes();
 				},
-				 timeformat: "%Y/%m/%d",
-				 zoomRange: [1,100]
+				 timeformat: "%Y/%m/%d"
 			},
 			yaxis: {
 				min: 0,

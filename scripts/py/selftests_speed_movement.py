@@ -56,7 +56,8 @@ def test_case():
 			
 	gcs.send('G27')
 	
-	for i in [5, 7, 8, 10, 15, 18]:
+	#~ for i in [5, 7, 8, 10, 15, 18]:
+	for i in [5, 15]:
 		speed = int(1000*i)
 		print 'Speed F = {0} mm/sec'.format( round(speed / 60.0, 2) )
 		gcs.send('G90')

@@ -36,8 +36,16 @@ class TestCase(GCodePusher):
 		self.send('M104 S0')
 		self.send('M140 S0')
 		
+		RETR = 1
+		
 		head_info = self.config.get_current_head_info()
 		self.trace('Installed head: {0}'.format(head_info['name']))
+		
+		reply = self.send("M745")
+		if reply[-2] != 'TRIGGERED':
+			self.trace('Please insert a printing head.')
+			self.stop()
+			exit(RETR)
 		
 		if "print" in head_info['capabilities']:
 			self.trace('Max allowed temperature: {0}C'.format(head_info['max_temp']))
@@ -50,7 +58,7 @@ class TestCase(GCodePusher):
 		
 		self.trace('== Nozzle heating started ==')
 		
-		RETR = 1
+		
 		# v2 head 21C -> 200C: 140s
 		# v1 head     -> 200C:
 		# pro_head    -> 200C:

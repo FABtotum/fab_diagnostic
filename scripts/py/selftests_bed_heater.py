@@ -36,11 +36,29 @@ class TestCase(GCodePusher):
 		self.send('M104 S0')
 		self.send('M140 S0')
 		
-		#exit(200)
+		RETR = 1
+		
+		# Bed status check
+		try:
+			bed_enabled = self.config.get('settings', 'hardware')['bed']['enable']
+		except KeyError:
+			bed_enabled = True
+		
+		if bed_enabled == True:
+			reply = self.send("M744")
+			if reply[-2] != 'TRIGGERED':
+				self.trace('Please insert the bed with the printing side up.')
+				self.stop()
+				exit(RETR)
+		else:
+			# Skip
+			self.trace('Skipping.')
+			self.stop()
+			exit(200)
 		
 		self.trace('== Bed heating started ==')
 		
-		RETR = 1
+		
 		timeout_60   = 120 # sec => 2 min
 		timeout_100  = 300 # sec => 5 min
 		duration = 0
