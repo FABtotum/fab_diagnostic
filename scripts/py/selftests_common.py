@@ -19,6 +19,7 @@
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+from fabtotum.totumduino.format import parseM119
 
 def shell_exec(cmd):
 	""" Execute shell command """
@@ -39,21 +40,25 @@ def check_pid(pid):
 
 def getEndstopValues(gcs):
 	""" Return endstop values. True is TRIGGERED """
-	endstops = {
-		'x_min': False,
-		'x_max': False,
-		'y_min': False,
-		'y_max': False,
-		'z_min': False,
-		'z_max': False
-	}
-	
 	reply = gcs.send('M119')
+	endstops = parseM119(reply)
+	if not endstops:
+		endstops = {
+			'x_min': False,
+			'x_max': False,
+			'y_min': False,
+			'y_max': False,
+			'z_min': False,
+			'z_max': False,
+			'external_z_min' : False
+		}
 	
-	for line in reply:
-		tmp = line.split(':')
-		if tmp[0] in endstops:
-			endstops[ tmp[0] ] = (tmp[1].strip() == 'TRIGGERED')
+	#~ reply = gcs.send('M119')
+	
+	#~ for line in reply:
+		#~ tmp = line.split(':')
+		#~ if tmp[0] in endstops:
+			#~ endstops[ tmp[0] ] = (tmp[1].strip() == 'TRIGGERED')
 	
 	return endstops
 

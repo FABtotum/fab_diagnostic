@@ -57,13 +57,13 @@ def test_case():
 	endstops_start = getEndstopValues(gcs)
 	
 	if switch == 0: # x_min endstop
-		if not endstops_start['x_min'] or not endstops_start['y_max']:
+		if not endstops_start['x_min'] or not endstops_start['y_min']:
 			print "  Move the head to front-left corner so that it triggeres the endstops"
 			#~ print "  Note: if you have done this and still get this error message, it could be the x_min is damaged"
 			gcs.send('M18')
 			exit(1)
 	else:
-		if not endstops_start['x_max'] or not endstops_start['y_max']:
+		if not endstops_start['x_max'] or not endstops_start['y_min']:
 			print "  Move the head to front-right corner so that it triggeres the endstops"
 			gcs.send('M18')
 			exit(1)
@@ -88,10 +88,10 @@ def test_case():
 			gcs.send('M18')
 			exit(1)
 			
-	if endstops_start['y_max'] and not endstops_after_g27['y_max']:
-		print "y_max endstop: PASSED"
+	if endstops_start['y_min'] and not endstops_after_g27['y_min']:
+		print "y_min endstop: PASSED"
 	else:
-		print "x_max endstop: FAILED"
+		print "y_min endstop: FAILED"
 		gcs.send('M18')
 		exit(1)
 		
@@ -152,10 +152,10 @@ def test_case():
 	# Restore enable endstop warning
 	reply = gcs.send('M734 S{0}'.format(endstop_warning))
 	
-	if not endstops_start['y_min'] and endstops_tmp['y_min']:
-		print "y_min endstop: PASSED"
+	if not endstops_start['y_max'] and endstops_tmp['y_max']:
+		print "y_max endstop: PASSED"
 	else:
-		print "y_min endstop: FAILED"
+		print "y_max endstop: FAILED"
 		gcs.send('M18')
 		exit(1)
 			

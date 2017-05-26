@@ -28,13 +28,16 @@ def test_case():
 	RETR=1
 	
 	print ">> G0"
-	reply = gcs.send('G0')
+	reply = gcs.send('G0', timeout=5)
 	if reply:
 		print "<<", " ".join(reply)
 		if reply[0] == 'ok':
 			# Success
 			print "Totumduino link is working."
 			RETR=0
+	else:
+		print ">> no response"
+		print "Totumduino link is not working."
 	
 	# Result
 	exit(RETR)
