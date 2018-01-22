@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
+from translation import _, setLanguage
+
 def test_case(args):
 	current_table_tmp = args[1].split()
 	planned_table_tmp = args[2].split()
@@ -45,9 +47,9 @@ def test_case(args):
 					print "Partition",pt,"has the wrong size. Expected ",tg_size,"MB but has",size,"MB"
 					RETR=1
 				else:
-					print "Partition",pt,"size is correct"
+					print _("Partition {0} size is correct".format(pt))
 		else:
-			print "Partition",pt,"does not exist"
+			print _("Partition {0} does not exist".format(pt))
 			RETR=1
 	
 	# Result

@@ -1,0 +1,647 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: fab_diagnostic\n"
+"POT-Creation-Date: 2018-01-22 15:55+0100\n"
+"PO-Revision-Date: 2018-01-22 16:00+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: assets\n"
+"X-Poedit-SearchPath-1: config\n"
+"X-Poedit-SearchPath-2: scripts\n"
+"X-Poedit-SearchPath-3: views\n"
+"X-Poedit-SearchPath-4: controller.php\n"
+
+#: config/test_cases/firmware.php:11
+msgid "Bootloader"
+msgstr "Bootloader"
+
+#: config/test_cases/firmware.php:12
+msgid "Check bootloader communcation"
+msgstr "Verifica comunicazione con il bootloader"
+
+#: config/test_cases/firmware.php:20
+msgid "Baudrate (115k)"
+msgstr "Baudrate (115k)"
+
+#: config/test_cases/firmware.php:21
+msgid "Check if totumduino is using 115200 baudrate"
+msgstr "Verifica se totumduino sta utilizzando 115200 baudrate"
+
+#: config/test_cases/firmware.php:29
+msgid "Baudrate (250k)"
+msgstr "Baudarate (250k)"
+
+#: config/test_cases/firmware.php:30
+msgid "Check if totumduino is using 250000 baudrate"
+msgstr "Verifica se totumduino sta utilizzando 250000 baudrate"
+
+#: config/test_cases/firmware.php:38
+msgid "Firmware version"
+msgstr "Versione firmware"
+
+#: config/test_cases/firmware.php:39
+msgid "Get firmware version"
+msgstr "Lettura versione firmware"
+
+#: config/test_cases/firmware.php:47
+msgid "Dump flash"
+msgstr ""
+
+#: config/test_cases/firmware.php:48
+msgid "Dump totumduino flash content to a file"
+msgstr ""
+
+#: config/test_cases/firmware.php:56
+msgid "Dump EEPROM"
+msgstr ""
+
+#: config/test_cases/firmware.php:57
+msgid "Dump totumduino EEPROM content to a file"
+msgstr ""
+
+#: config/test_cases/network.php:11
+msgid "Ethernet gateway"
+msgstr ""
+
+#: config/test_cases/network.php:12
+msgid "Check if ethernet gateway is configured and accessible"
+msgstr "Verifica se il gateway ethernet è configurato ed accessibile"
+
+#: config/test_cases/network.php:20
+msgid "WiFi gateway"
+msgstr ""
+
+#: config/test_cases/network.php:21
+msgid "Check if WiFi gateway is configured and accessible"
+msgstr "Verifica se il gateway WiFi è configurato ed accessibile"
+
+#: config/test_cases/network.php:29
+msgid "WiFi scan"
+msgstr ""
+
+#: config/test_cases/network.php:30
+msgid "Check if WiFi scan feature is working"
+msgstr "Verifica se la funzione di scansione della rete è funzionante"
+
+#: config/test_cases/network.php:38
+msgid "Internet DNS"
+msgstr ""
+
+#: config/test_cases/network.php:39
+msgid "Check if DNS server is configured and accessible"
+msgstr "Verifica se i server DNS sono configurati ed accessibili"
+
+#: config/test_cases/network.php:47
+msgid "Internet connection"
+msgstr "Connessione internet"
+
+#: config/test_cases/network.php:48
+msgid "Check if internet connection is available"
+msgstr "Verifica se la connessione internet è disponibile"
+
+#: config/test_cases/network.php:56
+msgid "Update server"
+msgstr "Server aggiornamenti"
+
+#: config/test_cases/network.php:57
+msgid "Check connection to the update server and download speed"
+msgstr "Verifica la connessione col server degli aggiornamenti e la velocità di download"
+
+#: config/test_cases/os.php:11
+msgid "System tools"
+msgstr "Strumenti di sistema"
+
+#: config/test_cases/os.php:12
+msgid "Check system tools functionality"
+msgstr "Verifica la funzionalità degli strumenti di sistema"
+
+#: config/test_cases/os.php:20
+msgid "Bundles integrity"
+msgstr ""
+
+#: config/test_cases/os.php:21
+msgid "Check bundles checksums"
+msgstr ""
+
+#: config/test_cases/os.php:29
+msgid "Partitions"
+msgstr "Partizioni"
+
+#: config/test_cases/os.php:30
+msgid "Check filesystem partition sizes and metadata"
+msgstr ""
+
+#: config/test_cases/os.php:38
+msgid "Disk free space"
+msgstr ""
+
+#: config/test_cases/os.php:39
+msgid "Check filesystem partition have enough free space"
+msgstr ""
+
+#: config/test_cases/os.php:47
+msgid "Python check"
+msgstr "Controllo Python"
+
+#: config/test_cases/os.php:48
+msgid "Check for python and required modules"
+msgstr ""
+
+#: config/test_cases/os.php:56
+msgid "PHP check"
+msgstr "Controllo PHP"
+
+#: config/test_cases/os.php:57
+msgid "Check for php and required modules"
+msgstr ""
+
+#: config/test_cases/selftests.php:11
+msgid "FABUI services"
+msgstr ""
+
+#: config/test_cases/selftests.php:12 config/test_cases/selftests.php:52
+msgid "Check if all fabui services are running"
+msgstr ""
+
+#: config/test_cases/selftests.php:19
+msgid "Totumduino link"
+msgstr ""
+
+#: config/test_cases/selftests.php:20
+msgid "Check if communication with totumduino is working"
+msgstr ""
+
+#: config/test_cases/selftests.php:27
+msgid "Power supply check"
+msgstr ""
+
+#: config/test_cases/selftests.php:28
+msgid "Check power supply voltage and current"
+msgstr ""
+
+#: config/test_cases/selftests.php:35
+msgid "Nozzle heater"
+msgstr "Controllo del riscaldamento dell'ugello"
+
+#: config/test_cases/selftests.php:36
+msgid "Check the nozzle heater"
+msgstr ""
+
+#: config/test_cases/selftests.php:43
+msgid "Bed heater"
+msgstr ""
+
+#: config/test_cases/selftests.php:44
+msgid "Check the bed heater"
+msgstr ""
+
+#: config/test_cases/selftests.php:51
+msgid "Milling motor"
+msgstr ""
+
+#: config/test_cases/selftests.php:59
+msgid "Endstops and movement"
+msgstr ""
+
+#: config/test_cases/selftests.php:60
+msgid "Check endstops functionality and XYZ movement"
+msgstr ""
+
+#: config/test_cases/selftests.php:67
+msgid "Speed test"
+msgstr ""
+
+#: config/test_cases/selftests.php:68
+msgid "Check different movement speed"
+msgstr ""
+
+#: config/test_cases/selftests.php:75
+msgid "Touch probe"
+msgstr ""
+
+#: config/test_cases/selftests.php:76
+msgid "Check touch probe functionality"
+msgstr ""
+
+#: config/test_cases/selftests.php:83
+msgid "Ambient lights"
+msgstr ""
+
+#: config/test_cases/selftests.php:84
+msgid "Check if the RGB ambient LEDs are working"
+msgstr ""
+
+#: controller.php:51
+msgid "Self-tests"
+msgstr ""
+
+#: controller.php:52
+msgid "Network"
+msgstr "Rete"
+
+#: controller.php:53
+msgid "Firmware"
+msgstr "Firmware"
+
+#: controller.php:54
+msgid "Sensors"
+msgstr "Sensori"
+
+#: controller.php:55
+msgid "FabUI"
+msgstr "FabUI"
+
+#: controller.php:56
+msgid "OS"
+msgstr "OS"
+
+#: controller.php:100 views/js.php:97
+msgid "Passed"
+msgstr "Passato"
+
+#: controller.php:102 views/js.php:99
+msgid "Skipped"
+msgstr "Saltato"
+
+#: controller.php:104 views/js.php:101
+msgid "Failed"
+msgstr "Fallito"
+
+#: controller.php:139
+msgid "Diagnostic tools"
+msgstr ""
+
+#: scripts/py/os_partitions.py:50
+#, python-brace-format
+msgid "Partition {0} size is correct"
+msgstr ""
+
+#: scripts/py/os_partitions.py:52
+#, python-brace-format
+msgid "Partition {0} does not exist"
+msgstr ""
+
+#: scripts/py/os_python_check.py:40
+#, python-brace-format
+msgid "Checking Python version: OK {0}"
+msgstr ""
+
+#: scripts/py/os_python_check.py:42
+#, python-brace-format
+msgid "Checking Python version: ERROR {0}"
+msgstr ""
+
+#: scripts/py/os_python_check.py:45
+msgid "Checking Python version: ERROR (< 2.0)"
+msgstr ""
+
+#: scripts/py/os_python_check.py:72
+msgid "Checking pyserial version..."
+msgstr ""
+
+#: scripts/py/os_python_check.py:113
+msgid "Checking OpenCV JPEG support..."
+msgstr ""
+
+#: scripts/py/os_python_check.py:121
+msgid "Checking OpenCV PNG support..."
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:56
+#, python-brace-format
+msgid "Is RED working...{0}"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:58
+msgid "Setting GREEN color"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:66
+msgid "Are the GREEN ambient lights glowing?"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:74
+#, python-brace-format
+msgid "Is GREEN working...{0}"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:76
+msgid "Setting BLUE color"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:84
+msgid "Are the BLUE ambient lights glowing?"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:92
+#, python-brace-format
+msgid "Is BLUE working...{0}"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:94
+msgid "Setting WHITE color"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:100
+msgid "All lights are working"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:103
+msgid "Some lights are not working"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:109
+#: scripts/py/selftests_milling_motor.py:85 scripts/py/selftests_probe.py:76
+#, python-brace-format
+msgid "unknown action [{0}]"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:115
+msgid "=== Starting ambient light test ==="
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:117
+msgid "Setting RED color"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:125
+msgid "Are the RED ambient lights glowing?"
+msgstr ""
+
+#: scripts/py/selftests_ambient_lights.py:132
+msgid "=== Ambient light test finished ==="
+msgstr ""
+
+#: scripts/py/selftests_bed_heater.py:36
+#: scripts/py/selftests_nozzle_heater.py:36
+msgid "Preparing test"
+msgstr ""
+
+#: scripts/py/selftests_bed_heater.py:42
+msgid "== Bed heating started =="
+msgstr ""
+
+#: scripts/py/selftests_bed_heater.py:62
+msgid "Error reading temperatures"
+msgstr ""
+
+#: scripts/py/selftests_bed_heater.py:67
+#, python-brace-format
+msgid "@{0}sec, Bed: {1}C"
+msgstr ""
+
+#: scripts/py/selftests_bed_heater.py:76 scripts/py/selftests_bed_heater.py:88
+#, python-brace-format
+msgid "Temperature didn't reach {0}C in {1} seconds."
+msgstr ""
+
+#: scripts/py/selftests_bed_heater.py:81
+#, python-brace-format
+msgid "Target #2 {0}C temperature reached in {1}sec"
+msgstr ""
+
+#: scripts/py/selftests_bed_heater.py:93
+msgid "== Bed heating finished =="
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:55
+#: scripts/py/selftests_speed_movement.py:55
+msgid "! Front panel door is opened, please close it or disable door safety."
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:63
+msgid "Move the head to front-left corner so that it triggeres the endstops"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:69
+msgid "Move the head to front-right corner so that it triggeres the endstops"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:80
+msgid "x_min endstop: PASSED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:82
+msgid "x_min endstop: FAILED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:87
+#: scripts/py/selftests_endstops_movement.py:134
+msgid "x_max endstop: PASSED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:89
+#: scripts/py/selftests_endstops_movement.py:96
+#: scripts/py/selftests_endstops_movement.py:136
+msgid "x_max endstop: FAILED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:94
+msgid "y_max endstop: PASSED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:108
+msgid "z_max endstop: PASSED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:110
+msgid "z_max endstop: FAILED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:158
+msgid "y_min endstop: PASSED"
+msgstr ""
+
+#: scripts/py/selftests_endstops_movement.py:160
+msgid "y_min endstop: FAILED"
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:49
+msgid "=== Milling motor stress test started ==="
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:52
+msgid "Waiting to start up..."
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:61
+msgid "Stopping motor"
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:67
+msgid "Did the motor start and was changing speed?"
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:78
+#, python-brace-format
+msgid "Is the motor working...{0}"
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:91
+msgid "=== Preparing test ==="
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:94
+#: scripts/py/selftests_nozzle_heater.py:41
+#, python-brace-format
+msgid "Installed head: {0}"
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:97
+msgid "Head does not support milling."
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:98
+#: scripts/py/selftests_nozzle_heater.py:48
+msgid "Skipping test."
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:105
+msgid "When ready click OK to start the motor."
+msgstr ""
+
+#: scripts/py/selftests_milling_motor.py:112
+msgid "=== Milling motor stress test finished ==="
+msgstr ""
+
+#: scripts/py/selftests_nozzle_heater.py:44
+#, python-brace-format
+msgid "Max allowed temperature: {0}C"
+msgstr ""
+
+#: scripts/py/selftests_nozzle_heater.py:45
+#, python-brace-format
+msgid "PID: {0}"
+msgstr ""
+
+#: scripts/py/selftests_nozzle_heater.py:47
+msgid "Head does not support heating."
+msgstr ""
+
+#: scripts/py/selftests_nozzle_heater.py:52
+msgid "== Nozzle heating started =="
+msgstr ""
+
+#: scripts/py/selftests_nozzle_heater.py:73
+#, python-brace-format
+msgid "@{0}sec, Nozzle: {1}C"
+msgstr ""
+
+#: scripts/py/selftests_nozzle_heater.py:79
+#, python-brace-format
+msgid "Target temperature reached in {0}sec"
+msgstr ""
+
+#: scripts/py/selftests_nozzle_heater.py:89
+msgid "== Nozzle heating finished =="
+msgstr ""
+
+#: scripts/py/selftests_probe.py:60
+msgid "Is the probe closed?"
+msgstr ""
+
+#: scripts/py/selftests_probe.py:67
+#, python-brace-format
+msgid "Is probe closed...{0}"
+msgstr ""
+
+#: scripts/py/selftests_probe.py:86
+msgid "=== Starting probe test ==="
+msgstr ""
+
+#: scripts/py/selftests_probe.py:87
+msgid "Opening probe"
+msgstr ""
+
+#: scripts/py/selftests_probe.py:93
+msgid "Is the probe extended?"
+msgstr ""
+
+#: scripts/py/selftests_probe.py:99
+msgid "=== Probe test finished ==="
+msgstr ""
+
+#: scripts/py/selftests_psu.py:57
+#, python-brace-format
+msgid "[V] PSU Voltage nominal 24V DC (+/-20% tolerance): {0}V"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:59
+#, python-brace-format
+msgid "CRITICAL: PSU Voltage anomaly. Expected 24V DC +/-20%, got : {0}V"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:62 scripts/py/selftests_psu.py:65
+msgid "No response for M751"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:75
+#, python-brace-format
+msgid "[V] 5V DC Power Supply is Nominal (+/-20% tolerance): {0}V"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:77
+#, python-brace-format
+msgid "CRITICAL: 5V DC Power Supply anomaly. Expected 5V DC +/-20%, got : {0}V"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:80 scripts/py/selftests_psu.py:83
+msgid "No response for M752"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:93
+#, python-brace-format
+msgid "[A] Power consumption is Nominal : {0}A < 500mA"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:95
+#, python-brace-format
+msgid "CRITICAL: Power consumption Anomaly : {0}A, expected < 500mA"
+msgstr ""
+
+#: scripts/py/selftests_psu.py:98 scripts/py/selftests_psu.py:101
+msgid "No response for M753"
+msgstr ""
+
+#: scripts/py/selftests_services.py:43
+msgid "Checking FABTotums service:"
+msgstr "Controllo dei servizi FABTotum:"
+
+#: scripts/py/selftests_services.py:55
+msgid "Checking XML-RPC service:"
+msgstr "Controllo servizio XML-RPC:"
+
+#: scripts/py/selftests_services.py:67
+msgid "Checking GPIO monitor service:"
+msgstr "Controllo servizo monitoraggio GPIO:"
+
+#: scripts/py/selftests_services.py:79
+msgid "Checking WebSocket service:"
+msgstr "Controllo servizio WebSocket:"
+
+#: scripts/py/selftests_totumduino_link.py:37
+msgid "Totumduino link is working."
+msgstr ""
+
+#: views/main_widget.php:22
+msgid "Logs"
+msgstr ""
+
+#: views/main_widget.php:30
+msgid "Download"
+msgstr "Scarica"
+
+#: views/main_widget.php:31
+msgid "Close"
+msgstr "Chiudi"
+
+#: views/main_widget.php:54
+msgid "Loading..."
+msgstr ""

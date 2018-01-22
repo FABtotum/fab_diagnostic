@@ -20,6 +20,7 @@
 
 import time
 from threading import Event, Thread, RLock
+from translation import _, setLanguage
 
 from fabtotum.fabui.gpusher import GCodePusher
 from fabtotum.fabui.notify  import NotifyService
@@ -56,14 +57,14 @@ class TestCase(GCodePusher):
 				data = {
 					'id' : 'is_probe_closed',
 					'type': 'question',
-					'msg': 'Is the probe closed?',
+					'msg': _('Is the probe closed?'),
 					'buttons' : '[Yes][No]'
 				}
 				self.ns.notify('selftest', data)
 				
 			elif data[0] == 'is_probe_closed':
 				self.has_closed = ('Yes' == data[1])
-				self.trace('Is probe closed...{0}'.format(data[1]))
+				self.trace(_('Is probe closed...{0}').format(data[1]))
 
 				if self.has_opened and self.has_closed:
 					self.exit(0)
@@ -72,7 +73,7 @@ class TestCase(GCodePusher):
 			else:
 				self.exit(1)
 		else:
-			self.trace('unknown action [{0}]'.format(action))
+			self.trace(_('unknown action [{0}]').format(action))
 			self.exit(1)
 	
 	def run(self):
@@ -82,20 +83,20 @@ class TestCase(GCodePusher):
 		self.send('M402')
 
 		# Start
-		self.trace("=== Starting probe test ===")
-		self.trace("Opening probe")
+		self.trace(_("=== Starting probe test ==="))
+		self.trace(_("Opening probe"))
 		self.send('M401')
 
 		data = {
 			'id' : 'is_probe_opened',
 			'type': 'question',
-			'msg': 'Is the probe extended?',
+			'msg': _('Is the probe extended?'),
 			'buttons' : '[Yes][No]'
 		}
 		self.ns.notify('selftest', data)
 		
 		self.loop()
-		self.trace("=== Probe test finished ===")
+		self.trace(_("=== Probe test finished ==="))
 		self.exit(self.error_code)
 		
 if __name__ == "__main__":

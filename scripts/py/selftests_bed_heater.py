@@ -20,6 +20,7 @@
 
 import time
 from fabtotum.fabui.gpusher import GCodePusher
+from translation import _, setLanguage
 
 class TestCase(GCodePusher):
 	
@@ -32,33 +33,15 @@ class TestCase(GCodePusher):
 	
 	def run(self):
 		self.resetTrace()
-		self.trace('Preparing test')
+		self.trace(_('Preparing test'))
 		self.send('M104 S0')
 		self.send('M140 S0')
 		
+		#exit(200)
+		
+		self.trace(_('== Bed heating started =='))
+		
 		RETR = 1
-		
-		# Bed status check
-		try:
-			bed_enabled = self.config.get('settings', 'hardware')['bed']['enable']
-		except KeyError:
-			bed_enabled = True
-		
-		if bed_enabled == True:
-			reply = self.send("M744")
-			if reply[-2] != 'TRIGGERED':
-				self.trace('Please insert the bed with the printing side up.')
-				self.stop()
-				exit(RETR)
-		else:
-			# Skip
-			self.trace('Skipping.')
-			self.stop()
-			exit(200)
-		
-		self.trace('== Bed heating started ==')
-		
-		
 		timeout_60   = 120 # sec => 2 min
 		timeout_100  = 300 # sec => 5 min
 		duration = 0
@@ -76,38 +59,38 @@ class TestCase(GCodePusher):
 			try:
 				nozzle_temp = float(temps['bed_temp'][-1])
 			except:
-				self.trace("Error reading temperatures")
+				self.trace(_("Error reading temperatures"))
 				break
 			
 			if print_cnt == PRINT_INTERVAL:
 				print_cnt = 1
-				self.trace('@{0}sec, Bed: {1}C'.format(duration, nozzle_temp) )
+				self.trace(_('@{0}sec, Bed: {1}C').format(duration, nozzle_temp) )
 			else:
 				print_cnt = print_cnt +1
 
 			if (nozzle_temp >= tgt_temp1) and not tgt_temp1_reached:
-				self.trace('Target #1 {0}C temperature reached in {1}sec'.format(tgt_temp1, duration))
+				self.trace('_(Target #1 {0}C temperature reached in {1}sec)'.format(tgt_temp1, duration))
 				tgt_temp1_reached = True
 				
 			if duration >= timeout_60 and nozzle_temp < tgt_temp1:
-				self.trace("Temperature didn't reach {0}C in {1} seconds.".format(tgt_temp1, timeout_60) )
+				self.trace(_("Temperature didn't reach {0}C in {1} seconds.").format(tgt_temp1, timeout_60) )
 				break
 			
 			if nozzle_temp >= tgt_temp2:
 				RETR = 0
-				self.trace('Target #2 {0}C temperature reached in {1}sec'.format(tgt_temp2, duration))
+				self.trace(_('Target #2 {0}C temperature reached in {1}sec').format(tgt_temp2, duration))
 				break
 
 			
 			time.sleep(1)
 			duration = duration +1
 			if (timeout_100 - duration) == 0:
-				self.trace("Temperature didn't reach {0}C in {1} seconds.".format(tgt_temp2, timeout_100) )
+				self.trace(_("Temperature didn't reach {0}C in {1} seconds.").format(tgt_temp2, timeout_100) )
 				break
 		
 		self.send('M140 S0')
 		
-		self.trace('== Bed heating finished ==')
+		self.trace(_('== Bed heating finished =='))
 		self.stop()
 		exit(RETR)
 

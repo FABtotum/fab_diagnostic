@@ -14,6 +14,7 @@
 
 	$(function () {
 		$('.test-action').on('click', doTestAction);
+		$(".task-action").on('click', doTaskAction);
 	});
 
 	function doTestAction()
@@ -54,6 +55,10 @@
 				$("#logsModal").modal('show');
 				
 				$(".test-action").removeClass('disabled');
+
+				$(".task-action").attr('data-subsystem', subsystem);
+				$(".task-action").attr('data-test-case', test_case);
+				
 			});
 	}
 	
@@ -81,18 +86,19 @@
 			  type: "POST",
 			  data : {}
 		}).done(function(data) {
-			console.log(data);
+
+			
 			var html = ' <span class="badge label-danger"><i class="fa fa-times-circle" aria-hidden="true"></i> Failed to execute test</span>';
 			
 			if(data)
 			{
 				
 				if(data.test == "passed")
-					html='<button class="btn btn-success test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-check-circle" aria-hidden="true"></i> Passed</button>';
+					html='<button class="btn btn-success test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-check-circle" aria-hidden="true"></i> <?php echo dgettext('fab_diagnostics', 'Passed');?></button>';
 				else if(data.test == "skipped")
-					html='<button class="btn btn-warning test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Skipped</button>';
+					html='<button class="btn btn-warning test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <?php echo dgettext('fab_diagnostics', 'Skipped');?></button>';
 				else
-					html='<button class="btn btn-danger test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-times-circle" aria-hidden="true"></i> Failed</button>';
+					html='<button class="btn btn-danger test-action" data-subsystem="'+subsystem+'" data-test-case="'+test_case+'" data-action="show-log"><i class="fa fa-times-circle" aria-hidden="true"></i> <?php echo dgettext('fab_diagnostics', 'Failed');?></button>';
 			}
 			
 			if(obj_check == "object")
@@ -167,6 +173,30 @@
 			points: {"show" : false}
 		});
 		return data;
+	}
+
+	/**
+	*
+	**/
+	function doTaskAction()
+	{
+		var action = $(this).attr("data-action");
+		var subsystem = $(this).attr("data-subsystem");
+		var test_case = $(this).attr("data-test-case");
+
+		switch(action){
+			case 'download-log':
+				downloadLog(subsystem, test_case);
+				break;
+		}
+	}
+
+	/**
+	*
+	**/
+	function downloadLog(subsystem, test_case)
+	{
+		window.open("<?php echo site_url( plugin_url("downloadTestCaseLog") ) ?>/" + subsystem + "/" + test_case, '_blank');
 	}
 
 </script>

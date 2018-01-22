@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
+from translation import _, setLanguage
+
 def test_case():
 	from fabtotum.utils.pyro.gcodeclient import GCodeServiceClient
 	from fabtotum.fabui.config import ConfigService
@@ -50,14 +52,13 @@ def test_case():
 	#~ print "Checking safety measures..."
 	if safety_door == 1:
 		if not getFrontPanelStatus(gcs):
-			print "! Front panel door is opened, please close it or disable door safety."
+			print _("! Front panel door is opened, please close it or disable door safety.")
 			gcs.send('M18')
 			exit(1)
 			
 	gcs.send('G27')
 	
-	#~ for i in [5, 7, 8, 10, 15, 18]:
-	for i in [5, 15]:
+	for i in [5, 7, 8, 10, 15, 18]:
 		speed = int(1000*i)
 		print 'Speed F = {0} mm/sec'.format( round(speed / 60.0, 2) )
 		gcs.send('G90')

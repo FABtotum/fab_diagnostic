@@ -17,28 +17,29 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
-from translation import _, setLanguage
 
-def test_case():
-	from fabtotum.utils.pyro.gcodeclient import GCodeServiceClient
-	
-	# Pyro GCodeService wrapper
-	gcs = GCodeServiceClient()
-	
-	# Failure
-	RETR=1
-	
-	print ">> G0"
-	reply = gcs.send('G0')
-	if reply:
-		print "<<", " ".join(reply)
-		if reply[0] == 'ok':
-			# Success
-			print _("Totumduino link is working.")
-			RETR=0
-	
-	# Result
-	exit(RETR)
+# Import standard python module
+import os
+import gettext
+import ConfigParser
 
-if __name__ == "__main__":
-	test_case()
+# Import external modules
+
+# Import internal modules
+from fabtotum.fabui.config  import ConfigService
+
+# Set up message catalog access
+
+tr = gettext.translation('fab_diagnostic', '/mnt/userdata/plugins/fab_diagnostic/locale', fallback=True)
+_ = tr.ugettext
+
+def setLanguage(lang, domain='fab_diagnostic', config=None):
+    if not config:
+        config = ConfigService()
+
+    locale_path = config.get('general', 'locale_path')
+    
+    tr = gettext.translation('fab_diagnostic', locale_path, fallback=True, languages=[lang])
+    _ = tr.ugettext
+    
+    return _

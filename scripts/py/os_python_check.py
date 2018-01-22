@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
+from translation import _, setLanguage
+
 def testModule (name):
 	try:
 		mod = __import__(name)
@@ -35,12 +37,12 @@ def test_case():
 	try:
 		version = sys.version_info
 		if (version[0] == 2 and version[1] == 7):
-			print "Checking Python version: OK ", sys.version
+			print _("Checking Python version: OK {0}").format(sys.version)
 		else:
-			print "Checking Python version: ERROR "+sys.version
+			print _("Checking Python version: ERROR {0}").format(sys.version)
 			RETR=1
 	except Exception:
-		print "Checking Python version: ERROR (< 2.0)"
+		print _("Checking Python version: ERROR (< 2.0)")
 		RETR=1
 		
 		
@@ -67,7 +69,7 @@ def test_case():
 		
 	if testModule("serial"):
 		import serial
-		print "Checking pyserial version...",
+		print _("Checking pyserial version..."),
 		try:
 			serialVersion = serial.VERSION
 			print serialVersion
@@ -108,7 +110,7 @@ def test_case():
 			import cv, cv2
 			
 			image = numpy.zeros((16,16,3),numpy.uint8)
-			print "Checking OpenCV JPEG support...",
+			print _("Checking OpenCV JPEG support..."),
 			try:
 				cv2.imwrite('/tmp/cv2_test.jpg',image)
 				print "OK"
@@ -116,7 +118,7 @@ def test_case():
 				print "ERROR"
 				RETR=1
 				
-			print "Checking OpenCV PNG support...",
+			print _("Checking OpenCV PNG support..."),
 			try:
 				cv2.imwrite('/tmp/cv2_test.png',image)
 				print "OK"

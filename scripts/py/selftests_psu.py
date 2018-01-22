@@ -17,6 +17,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
+from translation import _, setLanguage
 
 def test_case():
 	from fabtotum.utils.pyro.gcodeclient import GCodeServiceClient
@@ -53,15 +54,15 @@ def test_case():
 		try:
 			V = float(reply[0].split(':')[1].split()[0])
 			if V > 19.200 and V < 28.800:
-				print "[V] PSU Voltage nominal 24V DC (+/-20% tolerance): {0}V".format(V)
+				print _("[V] PSU Voltage nominal 24V DC (+/-20% tolerance): {0}V").format(V)
 			else:
-				print "CRITICAL: PSU Voltage anomaly. Expected 24V DC +/-20%, got : {0}V".format(V)
+				print _("CRITICAL: PSU Voltage anomaly. Expected 24V DC +/-20%, got : {0}V").format(V)
 				RETR = 1
 		except:
-			print "No response for M751"
+			print _("No response for M751")
 			RETR = 1
 	else:
-		print "No response for M751"
+		print _("No response for M751")
 		RETR = 1
 	
 	# Read 5VDC
@@ -71,15 +72,15 @@ def test_case():
 		try:
 			V = float(reply[0].split(':')[1].split()[0])
 			if V > 4.0 and V < 6.0:
-				print "[V] 5V DC Power Supply is Nominal (+/-20% tolerance): {0}V".format(V)
+				print _("[V] 5V DC Power Supply is Nominal (+/-20% tolerance): {0}V").format(V)
 			else:
-				print "CRITICAL: 5V DC Power Supply anomaly. Expected 5V DC +/-20%, got : {0}V".format(V)
+				print _("CRITICAL: 5V DC Power Supply anomaly. Expected 5V DC +/-20%, got : {0}V").format(V)
 				RETR = 1
 		except:
-			print "No response for M752"
+			print _("No response for M752")
 			RETR = 1
 	else:
-		print "No response for M752"
+		print _("No response for M752")
 		RETR = 1
 		
 	# Read Current
@@ -89,15 +90,15 @@ def test_case():
 		try:
 			A= float(reply[0].split(':')[1].split()[0])
 			if A < 0.5:
-				print "[A] Power consumption is Nominal : {0}A < 500mA".format(A)
+				print _("[A] Power consumption is Nominal : {0}A < 500mA").format(A)
 			else:
-				print "CRITICAL: Power consumption Anomaly : {0}A, expected < 500mA".format(A)
+				print _("CRITICAL: Power consumption Anomaly : {0}A, expected < 500mA").format(A)
 				RETR = 1
 		except:
-			print "No response for M753"
+			print _("No response for M753")
 			RETR = 1
 	else:
-		print "No response for M753"
+		print _("No response for M753")
 		RETR = 1
 	
 	# Result

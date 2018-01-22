@@ -20,6 +20,7 @@
 
 import time
 from threading import Event, Thread, RLock
+from translation import _, setLanguage
 
 from fabtotum.fabui.gpusher import GCodePusher
 from fabtotum.fabui.notify  import NotifyService
@@ -52,9 +53,9 @@ class TestCase(GCodePusher):
 			if data[0] == 'is_red_working':
 				self.red = (data[1] == 'Yes')
 				
-				self.trace('Is RED working...{0}'.format(data[1]))
+				self.trace(_('Is RED working...{0}').format(data[1]))
 				
-				self.trace('Setting GREEN color')
+				self.trace(_('Setting GREEN color'))
 				self.send('M701 S0')
 				self.send('M702 S255')
 				self.send('M703 S0')
@@ -62,7 +63,7 @@ class TestCase(GCodePusher):
 				data = {
 					'id' : 'is_green_working',
 					'type': 'question',
-					'msg': 'Are the GREEN ambient lights glowing?',
+					'msg': _('Are the GREEN ambient lights glowing?'),
 					'buttons' : '[Yes][No]'
 				}
 				self.ns.notify('selftest', data)
@@ -70,9 +71,9 @@ class TestCase(GCodePusher):
 			elif data[0] == 'is_green_working':
 				self.green = (data[1] == 'Yes')
 				
-				self.trace('Is GREEN working...{0}'.format(data[1]))
+				self.trace(_('Is GREEN working...{0}').format(data[1]))
 				
-				self.trace('Setting BLUE color')
+				self.trace(_('Setting BLUE color'))
 				self.send('M701 S0')
 				self.send('M702 S0')
 				self.send('M703 S255')
@@ -80,7 +81,7 @@ class TestCase(GCodePusher):
 				data = {
 					'id' : 'is_blue_working',
 					'type': 'question',
-					'msg': 'Are the BLUE ambient lights glowing?',
+					'msg': _('Are the BLUE ambient lights glowing?'),
 					'buttons' : '[Yes][No]'
 				}
 				self.ns.notify('selftest', data)
@@ -88,32 +89,32 @@ class TestCase(GCodePusher):
 			elif data[0] == 'is_blue_working':
 				self.blue = (data[1] == 'Yes')
 				
-				self.trace('Is BLUE working...{0}'.format(data[1]))
+				self.trace(_('Is BLUE working...{0}').format(data[1]))
 				
-				self.trace('Setting WHITE color')
+				self.trace(_('Setting WHITE color'))
 				self.send('M701 S255')
 				self.send('M702 S255')
 				self.send('M703 S255')
 				
 				if self.red and self.green and self.blue:
-					self.trace('All lights are working')
+					self.trace(_('All lights are working'))
 					self.exit(0)
 				else:
-					self.trace('Some lights are not working')
+					self.trace(_('Some lights are not working'))
 					self.exit(1)
 				
 			else:
 				self.exit(1)
 		else:
-			self.trace('unknown action [{0}]'.format(action))
+			self.trace(_('unknown action [{0}]').format(action))
 			self.exit(1)
 	
 	def run(self):
 		self.resetTrace()
 
-		self.trace("=== Starting ambient light test ===")
+		self.trace(_("=== Starting ambient light test ==="))
 
-		self.trace('Setting RED color')
+		self.trace(_('Setting RED color'))
 		self.send('M701 S255')
 		self.send('M702 S0')
 		self.send('M703 S0')
@@ -121,14 +122,14 @@ class TestCase(GCodePusher):
 		data = {
 			'id' : 'is_red_working',
 			'type': 'question',
-			'msg': 'Are the RED ambient lights glowing?',
+			'msg': _('Are the RED ambient lights glowing?'),
 			'buttons' : '[Yes][No]'
 		}
 		self.ns.notify('selftest', data)
 		
 		self.loop()
 		
-		self.trace("=== Ambient light test finished ===")
+		self.trace(_("=== Ambient light test finished ==="))
 		self.exit(self.error_code)
 		
 if __name__ == "__main__":

@@ -10,11 +10,12 @@
         "/maintenance/fab_diagnostic": {
             "url": "plugin/fab_diagnostic", 
             "title": "Diagnostic", 
-            "icon": "fa fa-heartbeat"
+            "icon": "fa fa-heartbeat",
+			"pos": 100
         }
     }, 
     "plugin_uri": "https://github.com/FABtotum/fab_diagnostic", 
-    "version": "0.10.1", 
+    "version": "1.0.0", 
     "plugin_slug": "fab_diagnostic", 
     "filetypes": []
 }

@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with FABUI.  If not, see <http://www.gnu.org/licenses/>.
 
+from translation import _, setLanguage
+
 def test_case():
 	from selftests_common import shell_exec, check_pid
 	
@@ -38,7 +40,7 @@ def test_case():
 		xmlrpc_service = False # Is running inside fabtotum_service
 		
 	if fabtotum_service:
-		print "Checking FABTotums service:",
+		print _("Checking FABTotums service:"),
 		try:
 			with open('/run/fabtotumservices.pid', 'r') as f:
 				pid = int(f.read());
@@ -50,7 +52,7 @@ def test_case():
 			RETR=1
 		
 	if xmlrpc_service:
-		print "Checking XML-RPC service:",
+		print _("Checking XML-RPC service:"),
 		try:
 			with open('/run/xmlrpcserver.pid', 'r') as f:
 				pid = int(f.read());
@@ -62,7 +64,7 @@ def test_case():
 			RETR=1
 		
 	if gpiominitor_service:
-		print "Checking GPIO monitor service:",
+		print _("Checking GPIO monitor service:"),
 		try:
 			with open('/run/gpiomonitor.pid', 'r') as f:
 				pid = int(f.read());
@@ -74,7 +76,7 @@ def test_case():
 			RETR=1
 		
 	if websocket_service:
-		print "Checking WebSocket service:",
+		print _("Checking WebSocket service:"),
 		try:
 			with open('/run/webSocket.pid', 'r') as f:
 				pid = int(f.read());

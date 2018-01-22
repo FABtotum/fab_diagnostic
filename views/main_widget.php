@@ -19,7 +19,7 @@
 
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Logs</h4>
+				<h4 class="modal-title"><?php echo dgettext('fab_diagnostics', 'Logs');?></h4>
 			</div><!-- /.modal-header -->
 
 			<div class="modal-body" id="log-content">
@@ -27,8 +27,8 @@
 			</div><!-- /.modal-body -->
 
 			<div class="modal-footer">
-			<button type="button" class="btn btn-default task-action" data-action="download-log" title="Downlaod log files"><i class="fa fa-download"></i> <?php echo _("Download");?></button>
-			<button type="button" class="btn btn-primary" data-action="close" data-dismiss="modal"><i class="fa fa-save"></i> <?php echo _("Close");?></button>
+			<button type="button" class="btn btn-default task-action" data-action="download-log" title="Downlaod log files"><i class="fa fa-download"></i> <?php echo dgettext("fab_diagnostic", "Download");?></button>
+			<button type="button" class="btn btn-primary" data-action="close" data-dismiss="modal"><i class="fa fa-save"></i> <?php echo dgettext("fab_diagnostic", "Close");?></button>
 			</div><!-- /.modal-footer -->
 
 		</div><!-- /.modal-content -->
@@ -51,7 +51,7 @@
 				<div class="row" id="modal-trace" style="display:none">
 					<div class="textarea-div">
 						<div class="typearea">
-							<div class="custom-scroll trace-console" >Loading...</div>
+							<div class="custom-scroll trace-console" ><?php echo dgettext("fab_diagnostic", "Loading...");?></div>
 						</div>
 					</div>
 				</div>

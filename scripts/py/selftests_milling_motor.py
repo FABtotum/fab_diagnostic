@@ -24,6 +24,8 @@ from threading import Event, Thread, RLock
 from fabtotum.fabui.gpusher import GCodePusher
 from fabtotum.fabui.notify  import NotifyService
 
+from translation import _, setLanguage
+
 class TestCase(GCodePusher):
 	
 	def __init__(self):
@@ -44,10 +46,10 @@ class TestCase(GCodePusher):
 		exit(self.error_code)
 	
 	def __stress_test_thread(self):
-		self.trace('=== Milling motor stress test started ===')
+		self.trace(_('=== Milling motor stress test started ==='))
 		
 		self.send('M3 S6000')
-		self.trace('Waiting to start up...')
+		self.trace(_('Waiting to start up...'))
 		time.sleep(7)
 		
 		for rpm in range(7,14):
@@ -56,13 +58,13 @@ class TestCase(GCodePusher):
 			time.sleep(2)
 		
 		self.send('M5')
-		self.trace('Stopping motor')
+		self.trace(_('Stopping motor'))
 		time.sleep(2)
 		
 		data = {
 			'id' : 'is_working_question',
 			'type': 'question',
-			'msg': 'Did the motor start and was changing speed?',
+			'msg': _('Did the motor start and was changing speed?'),
 			'buttons' : '[Yes][No]'
 		}
 		self.ns.notify('selftest', data)
@@ -73,41 +75,41 @@ class TestCase(GCodePusher):
 				self.stress_test_thread = Thread( target=self.__stress_test_thread )
 				self.stress_test_thread.start()
 			elif data[0] == 'is_working_question':
-				self.trace('Is the motor working...{0}'.format(data[1]))
+				self.trace(_('Is the motor working...{0}').format(data[1]))
 				if data[1] == 'Yes':
 					self.exit(0)
 				self.exit(1)
 			else:
 				self.exit(1)
 		else:
-			self.trace('unknown action [{0}]'.format(action))
+			self.trace(_('unknown action [{0}]').format(action))
 			self.exit(1)
 	
 	def run(self):
 		self.resetTrace()
 
-		self.trace('=== Preparing test ===')
+		self.trace(_('=== Preparing test ==='))
 
 		head_info = self.config.get_current_head_info()
-		self.trace('Installed head: {0}'.format(head_info['name']))
+		self.trace(_('Installed head: {0}').format(head_info['name']))
 		
 		if "mill" not in head_info['capabilities']:
-			self.trace('Head does not support milling.')
-			self.trace('Skipping test.')
+			self.trace(_('Head does not support milling.'))
+			self.trace(_('Skipping test.'))
 			self.stop()
 			exit(200)
 
 		data = {
 			'id' : 'start_motor',
 			'type': 'confirm',
-			'msg': 'When ready click OK to start the motor.',
+			'msg': _('When ready click OK to start the motor.'),
 			'buttons' : '[OK]'
 		}
 		
 		self.ns.notify('selftest', data)
 		
 		self.loop()
-		self.trace("=== Milling motor stress test finished ===")
+		self.trace(_("=== Milling motor stress test finished ==="))
 		self.exit(self.error_code)
 		
 if __name__ == "__main__":

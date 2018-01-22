@@ -20,6 +20,7 @@
 
 import time
 from fabtotum.fabui.gpusher import GCodePusher
+from translation import _, setLanguage
 
 class TestCase(GCodePusher):
 	
@@ -32,33 +33,25 @@ class TestCase(GCodePusher):
 	
 	def run(self):
 		self.resetTrace()
-		self.trace('Preparing test')
+		self.trace(_('Preparing test'))
 		self.send('M104 S0')
 		self.send('M140 S0')
 		
-		RETR = 1
-		
 		head_info = self.config.get_current_head_info()
-		self.trace('Installed head: {0}'.format(head_info['name']))
-		
-		reply = self.send("M745")
-		if reply[-2] != 'TRIGGERED':
-			self.trace('Please insert a printing head.')
-			self.stop()
-			exit(RETR)
+		self.trace(_('Installed head: {0}').format(head_info['name']))
 		
 		if "print" in head_info['capabilities']:
-			self.trace('Max allowed temperature: {0}C'.format(head_info['max_temp']))
-			self.trace('PID: {0}'.format(head_info['pid']))
+			self.trace(_('Max allowed temperature: {0}C').format(head_info['max_temp']))
+			self.trace(_('PID: {0}').format(head_info['pid']))
 		else:
-			self.trace('Head does not support heating.')
-			self.trace('Skipping test.')
+			self.trace(_('Head does not support heating.'))
+			self.trace(_('Skipping test.'))
 			self.stop()
 			exit(200)
 		
-		self.trace('== Nozzle heating started ==')
+		self.trace(_('== Nozzle heating started =='))
 		
-		
+		RETR = 1
 		# v2 head 21C -> 200C: 140s
 		# v1 head     -> 200C:
 		# pro_head    -> 200C:
@@ -77,13 +70,13 @@ class TestCase(GCodePusher):
 			
 			if print_cnt == PRINT_INTERVAL:
 				print_cnt = 1
-				self.trace('@{0}sec, Nozzle: {1}C'.format(duration, nozzle_temp) )
+				self.trace(_('@{0}sec, Nozzle: {1}C').format(duration, nozzle_temp) )
 			else:
 				print_cnt = print_cnt +1
 			
 			if nozzle_temp >= tgt_temp:
 				RETR = 0
-				self.trace('Target temperature reached in {0}sec'.format(duration))
+				self.trace(_('Target temperature reached in {0}sec').format(duration))
 				break
 			
 			time.sleep(1)
@@ -93,7 +86,7 @@ class TestCase(GCodePusher):
 		
 		self.send('M104 S0')
 		
-		self.trace('== Nozzle heating finished ==')
+		self.trace(_('== Nozzle heating finished =='))
 		self.stop()
 		exit(RETR)
 

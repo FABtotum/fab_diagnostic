@@ -1,12 +1,10 @@
 selftests_ambient_lights = {
 	
 	start: function () {
-		console.log('template: START');
 		window.customNotificationsHandler = selftests_ambient_lights.customNotificationsHandler;
 	},
 	
 	end: function () {
-		console.log('template: END');
 		window.customNotificationsHandler = undefined;
 	},
 	
@@ -14,15 +12,12 @@ selftests_ambient_lights = {
 	{
 		trigger_data = [id, response];
 		
-		console.log('sendResponse', id, response);
-		
 		$.ajax({
 			type: 'post',
 			url: '/fabui/control/trigger/custom',
 			data: {'data' : trigger_data},
 			dataType: 'json'
 		}).done(function(data) {
-			console.log('Trigger sent');
 		});
 	},
 	
@@ -30,9 +25,6 @@ selftests_ambient_lights = {
 		
 		if(obj.type == "selftest")
 		{
-			console.log("Custom ws handler:", obj);
-			console.log(obj.data);
-			
 			switch(obj.data.type)
 			{
 				case "confirm": {
@@ -45,7 +37,6 @@ selftests_ambient_lights = {
 							content: '',
 							buttons: buttons
 						}, function(ButtonPressed) {
-							console.log('ButtonPressed', ButtonPressed);
 							selftests_ambient_lights.sendResponse(id, ButtonPressed);
 						});
 					
@@ -60,7 +51,7 @@ selftests_ambient_lights = {
 							content: '',
 							buttons: buttons
 						}, function(ButtonPressed) {
-							console.log('ButtonPressed', ButtonPressed);
+							
 							selftests_ambient_lights.sendResponse(id, ButtonPressed);
 						});
 					

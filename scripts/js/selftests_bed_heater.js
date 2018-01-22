@@ -50,7 +50,8 @@ selftests_bed_heater = {
 					var d = new Date(val);
 					return d.getHours() + ":" + d.getMinutes();
 				},
-				 timeformat: "%Y/%m/%d"
+				 timeformat: "%Y/%m/%d",
+				 zoomRange: [1,100]
 			},
 			yaxis: {
 				min: 0,
